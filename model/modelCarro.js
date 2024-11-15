@@ -41,6 +41,6 @@ modelCarro.belongsTo(modelCategoria, {
     sourceKey: 'cod_categoria'
 });
 
-modelCarro.sync({force:true});
+// modelCarro.sync({force:true});
 
 module.exports = modelCarro;
