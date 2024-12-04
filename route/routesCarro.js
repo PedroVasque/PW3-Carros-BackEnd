@@ -58,6 +58,8 @@ router.get('/listagemCar', (req, res) => {
 router.get('/listagemCar/:cod_carro', (req, res) => {
     let { cod_carro } = req.params;
 
+    console.log(cod_carro)
+    console.log("AAAAAAAAAAAAAA")
     modelCarro.findByPk(cod_carro)
     .then((response) => {
         return res.status(200).json({
@@ -76,20 +78,20 @@ router.get('/listagemCar/:cod_carro', (req, res) => {
 });
 
 /* ROTA PARA EXCLUIR CATEGORIA */
-router.delete('/excluirCategoria/:cod_categoria', async (req, res) => {
-    let { cod_categoria } = req.params;
+router.delete('/excluirCarro/:cod_carro', async (req, res) => {
+    let { cod_carro } = req.params;
 
     try {
         // Primeiro, verifique se há carros associados
-        const carrosAssociados = await modelCarro.findAll({ where: { cod_categoria } });
+        const carrosAssociados = await modelCarro.findAll({ where: { cod_carro} });
 
         if (carrosAssociados.length > 0) {
             // Você pode decidir excluir os carros associados primeiro
-            await modelCarro.destroy({ where: { cod_categoria } });
+            await modelCarro.destroy({ where: { cod_carro } });
         }
 
         // Agora, exclua a categoria
-        await modelCategoria.destroy({ where: { cod_categoria } });
+        await modelCategoria.destroy({ where: { cod_carro } });
 
         return res.status(200).json({
             errorStatus: false,
