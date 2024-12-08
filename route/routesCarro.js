@@ -90,9 +90,6 @@ router.delete('/excluirCarro/:cod_carro', async (req, res) => {
             await modelCarro.destroy({ where: { cod_carro } });
         }
 
-        // Agora, exclua a categoria
-        await modelCategoria.destroy({ where: { cod_carro } });
-
         return res.status(200).json({
             errorStatus: false,
             messageStatus: 'CATEGORIA EXCLUIDA COM SUCESSO'
