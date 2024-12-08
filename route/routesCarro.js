@@ -58,8 +58,6 @@ router.get('/listagemCar', (req, res) => {
 router.get('/listagemCar/:cod_carro', (req, res) => {
     let { cod_carro } = req.params;
 
-    console.log(cod_carro)
-    console.log("AAAAAAAAAAAAAA")
     modelCarro.findByPk(cod_carro)
     .then((response) => {
         return res.status(200).json({
@@ -104,14 +102,15 @@ router.delete('/excluirCarro/:cod_carro', async (req, res) => {
 });
 
 /* ROTA PARA ALTERAR CARRO */
-router.put('/alterarCar', (req, res) => {
-    let { cod_carro, nome_carro, cor_carro, categoria_carro } = req.body;
+router.put('/alterarCar/:cod_carro', (req, res) => {
+    let { nome_carro, cor_carro, cod_categoria } = req.body;
+    let { cod_carro } = req.params;
 
     modelCarro.update(
         {
             nome_carro,
             cor_carro,
-            categoria_carro
+            cod_categoria
         },
         { where: { cod_carro } }
     ).then(() => {

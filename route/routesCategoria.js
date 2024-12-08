@@ -71,6 +71,9 @@ router.get('/listagemCategoria/:cod_categoria', (req, res)=>{
 
     let { cod_categoria } = req.params;
 
+    console.log("AAAAAAAAAHHHHHHHH")
+    console.log(req.params)
+
     modelCategoria.findByPk(cod_categoria)
     .then(
         (response)=>{
